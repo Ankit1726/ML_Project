@@ -10,28 +10,22 @@ def load_data():
     df['species'] = iris.target
     return df, iris.target_names
 
-df, target_names = load_data()
+df,target_names=load_data()
 
-# Train model
-model = RandomForestClassifier()
-model.fit(df.iloc[:, :-1], df['species'])
+model=RandomForestClassifier()
+model.fit(df.iloc[:,:-1],df['species'])
 
-# Sidebar inputs
 st.sidebar.title("Input Features")
 sepal_length = st.sidebar.slider("Sepal length", float(df['sepal length (cm)'].min()), float(df['sepal length (cm)'].max()))
 sepal_width = st.sidebar.slider("Sepal width", float(df['sepal width (cm)'].min()), float(df['sepal width (cm)'].max()))
 petal_length = st.sidebar.slider("Petal length", float(df['petal length (cm)'].min()), float(df['petal length (cm)'].max()))
 petal_width = st.sidebar.slider("Petal width", float(df['petal width (cm)'].min()), float(df['petal width (cm)'].max()))
 
-# Put into a DataFrame with correct feature names
-input_data = pd.DataFrame(
-    [[sepal_length, sepal_width, petal_length, petal_width]],
-    columns=df.columns[:-1]  # use the same feature names as training
-)
+input_data = [[sepal_length, sepal_width, petal_length, petal_width]]
 
-# Prediction
+## PRediction
 prediction = model.predict(input_data)
 predicted_species = target_names[prediction[0]]
 
-st.write("### Prediction")
-st.write(f"The predicted species is: **{predicted_species}**")
+st.write("Prediction")
+st.write(f"The predicted species is: {predicted_species}")
