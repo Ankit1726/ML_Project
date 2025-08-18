@@ -32,3 +32,5 @@ upoaded_file = st.file_uploader('choose your csv file',type='csv')
 if upoaded_file is not None:
     df = pd.read_csv(upoaded_file)
     st.write(df)
+
+#### Live Link https://ankits.streamlit.app
